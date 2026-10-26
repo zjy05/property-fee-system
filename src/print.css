@@ -1,0 +1,107 @@
+/**
+ * 针式窄票打印样式（v1.4.0 重写）
+ *
+ * 关键修复：
+ * 1. 纸张尺寸不再交给浏览器猜（原 `size: auto` 是三联纸跑偏的根因），
+ *    改由 <PrintPaperStyle /> 按打印参数动态注入精确的 `@page { size: Wmm Hmm }`。
+ * 2. 一张收据 = 一个纸高（height 固定 + box-sizing: border-box），撕单线才对齐。
+ * 3. 打印时只保留票据及其祖先容器，其余 display:none，避免 visibility 方案
+ *    残留占位导致票据被挤到第二页；且票据走正常文档流，批量打印才能正确分页
+ *    （原实现用 position:absolute，多张会叠在一起，批量打印必然只出一张）。
+ */
+
+@media print {
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+
+  /* 只保留票据本身、票据内部元素，以及票据的祖先容器 */
+  body *:not(.print-area):not(.print-area *):not(:has(.print-area)) {
+    display: none !important;
+  }
+
+  /* 祖先容器：去掉屏幕上的网格/内边距/底色，让票据顶到纸边 */
+  body *:has(.print-area) {
+    display: block !important;
+    position: static !important;
+    float: none !important;
+    width: auto !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* 一张收据 = 一页 = 一个完整纸高；表格在纸张内容区居中（水平 + 垂直） */
+  .print-area.receipt-paper {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    width: var(--paper-width, 180mm) !important;
+    height: var(--paper-height, 210mm) !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: var(--paper-padding, 0) !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .print-area.receipt-paper > table {
+    flex: 0 0 auto !important;
+    margin: 0 auto !important;
+  }
+
+  .print-area * {
+    color: #000000 !important;
+    background: transparent !important;
+    border-color: #000000 !important;
+  }
+
+  /* 最后一张不再分页，避免多吐一张纸 */
+  .print-all .receipt-paper:last-child,
+  .print-area.receipt-paper:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  /* 屏幕上用于「逐户排除」的浮层按钮不打印 */
+  .print\:hidden {
+    display: none !important;
+  }
+}
+
+/* 屏幕预览下的票据纸效果：按纸张真实宽高显示，加一圈边框让「纸」的边界可见；
+   表格在纸张内容区居中，单张/全部模式都一样 */
+.receipt-paper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: var(--paper-padding, 0);
+  background: #ffffff;
+  border: 2px solid rgb(0 0 0 / 0.35);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.14);
+}
+
+.receipt-paper > table {
+  flex: 0 0 auto;
+  margin: 0 auto;
+}

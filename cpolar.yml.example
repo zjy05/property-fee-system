@@ -1,0 +1,13 @@
+# 复制为 cpolar.yml，填入你自己的 cpolar authtoken 和隧道 id
+authtoken: YOUR_CPOLAR_TOKEN
+tunnels:
+  property-fee:
+    id: YOUR_TUNNEL_ID
+    proto: http
+    addr: http://property-fee:4000
+    inspect: "false"
+    bind_tls: both
+    region: cn_top
+    disable_keep_alives: "false"
+    redirect_https: "false"
+    start_type: enable

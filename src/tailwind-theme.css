@@ -1,0 +1,378 @@
+:root {
+  --button-outline: rgba(0,0,0, .10);
+  --badge-outline: rgba(0,0,0, .05);
+
+  /* Automatic computation of border around primary / danger buttons */
+  --opaque-button-border-intensity: -8; /* In terms of percentages */
+
+  /* Backgrounds applied on top of other backgrounds when hovered/active */
+  --elevate-1: rgba(0,0,0, .03);
+  --elevate-2: rgba(0,0,0, .08);
+
+  --background: hsl(40 33% 97%);
+  --foreground: hsl(214 20% 19%);
+  --card: hsl(40 30% 99%);
+  --card-foreground: hsl(214 20% 19%);
+  --card-border: hsl(38 20% 88%);
+  --popover: hsl(40 30% 99%);
+  --popover-foreground: hsl(214 20% 19%);
+  --primary: hsl(212 56% 32%);
+  --primary-foreground: hsl(40 33% 97%);
+  --secondary: hsl(210 26% 94%);
+  --secondary-foreground: hsl(214 24% 24%);
+  --muted: hsl(210 22% 95%);
+  --muted-foreground: hsl(215 10% 46%);
+  --accent: hsl(210 26% 93%);
+  --accent-foreground: hsl(212 50% 28%);
+  --info: hsl(212 56% 32%);
+  --info-foreground: hsl(40 33% 97%);
+  --destructive: hsl(2 68% 45%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --success: hsl(130 54% 42%);
+  --success-foreground: hsl(115 77% 97%);
+  --warning: hsl(26 90% 49%);
+  --warning-foreground: hsl(33 100% 96%);
+  --border: hsl(38 18% 86%);
+  --input: hsl(38 18% 86%);
+  --ring: hsl(212 56% 32%);
+  --chart-1: hsl(212 56% 32%);
+  --chart-2: hsl(2 68% 45%);
+  --chart-3: hsl(42 62% 48%);
+  --chart-4: hsl(204 40% 48%);
+  --chart-5: hsl(26 32% 56%);
+  --sidebar: hsl(210 24% 96%);
+  --sidebar-foreground: hsl(214 20% 19%);
+  --sidebar-primary: hsl(212 56% 32%);
+  --sidebar-primary-foreground: hsl(40 33% 97%);
+  --sidebar-accent: hsl(210 30% 90%);
+  --sidebar-accent-foreground: hsl(212 50% 28%);
+  --sidebar-border: hsl(38 18% 88%);
+  --sidebar-ring: hsl(212 56% 32%);
+
+  /* Computed borders using hsl relative color syntax */
+  --primary-border: hsl(from hsl(212 56% 32%) h s calc(l + var(--opaque-button-border-intensity)));
+  --secondary-border: hsl(from hsl(210 26% 94%) h s calc(l + var(--opaque-button-border-intensity)));
+  --destructive-border: hsl(from hsl(2 68% 45%) h s calc(l + var(--opaque-button-border-intensity)));
+  --accent-border: hsl(from hsl(210 26% 93%) h s calc(l + var(--opaque-button-border-intensity)));
+  --muted-border: hsl(from hsl(210 22% 95%) h s calc(l + var(--opaque-button-border-intensity)));
+  --font-sans:
+    'LarkHackSafariFont', 'LarkEmojiFont', 'LarkChineseQuote', '-apple-system',
+    'BlinkMacSystemFont', 'Helvetica Neue', 'Tahoma', 'PingFang SC',
+    'Microsoft Yahei', 'Arial', 'Hiragino Sans GB', 'sans-serif',
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif:
+    'Geist', 'Geist Fallback', ui-serif, Georgia, Cambria, 'Times New Roman',
+    Times, serif;
+  --font-mono: 'Courier New', Courier, 'NSimSun', 'SimSun', monospace;
+  --radius: 0.5rem;
+  --shadow-x: 0px;
+  --shadow-y: 2px;
+  --shadow-blur: 12px;
+  --shadow-spread: 0px;
+  --shadow-opacity: 0.02;
+  --shadow-color: #000000;
+  --shadow-2xs: 0px 2px 12px 0px hsl(0 0% 0% / 0.01);
+  --shadow-xs: 0px 2px 12px 0px hsl(0 0% 0% / 0.01);
+  --shadow-sm:
+    0px 2px 12px 0px hsl(0 0% 0% / 0.02), 0px 1px 2px -1px hsl(0 0% 0% / 0.02);
+  --shadow:
+    0px 2px 12px 0px hsl(0 0% 0% / 0.02), 0px 1px 2px -1px hsl(0 0% 0% / 0.02);
+  --shadow-md:
+    0px 2px 12px 0px hsl(0 0% 0% / 0.02), 0px 2px 4px -1px hsl(0 0% 0% / 0.02);
+  --shadow-lg:
+    0px 2px 12px 0px hsl(0 0% 0% / 0.02), 0px 4px 6px -1px hsl(0 0% 0% / 0.02);
+  --shadow-xl:
+    0px 2px 12px 0px hsl(0 0% 0% / 0.02), 0px 8px 10px -1px hsl(0 0% 0% / 0.02);
+  --shadow-2xl: 0px 2px 12px 0px hsl(0 0% 0% / 0.05);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-card-border: var(--card-border);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --shadow-2xs: var(--shadow-2xs);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow: var(--shadow);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-2xl: var(--shadow-2xl);
+}
+
+/**
+ * Tailwind v4 的 preflight 把元素默认 border-color 从 v3 的 gray-200 改成了
+ * currentColor，不显式声明的 `border` / `border-r` 会继承文字色，边框看起来又黑又重。
+ * shadcn 官方 v4 迁移指南要求项目自带这段 base 层补回来。
+ */
+@layer base {
+  * {
+    border-color: var(--border);
+    outline-color: var(--ring);
+    @supports (color: color-mix(in lab, red, red)) {
+      outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+    }
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  /* ===== 苹果风质感（保守版：只改背景/浮层/按钮，不动主布局） ===== */
+  body {
+    background:
+      radial-gradient(800px 400px at 10% -5%, hsl(212 70% 90% / 0.6), transparent 60%),
+      radial-gradient(700px 400px at 100% 0%, hsl(260 55% 90% / 0.5), transparent 60%),
+      var(--background);
+    background-attachment: fixed;
+  }
+
+  /* 浮层毛玻璃：弹窗 / 侧边栏（下拉 wrapper 不加 backdrop-filter，否则会错位） */
+  aside,
+  [data-sidebar="sidebar"] {
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+  }
+
+  /* 弹窗本体：不透明（直接引用完整颜色变量，避免 hsl(var()) 嵌套解析失败导致透明） */
+  [role="dialog"] {
+    background-color: var(--card) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* 统计卡片等 Card：hover 上浮 + 放大 + 阴影 */
+  .card {
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+    will-change: transform;
+  }
+  .card:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 28px -10px hsl(212 50% 30% / 0.25);
+  }
+
+  /* ===== 流畅度优化（GPU 加速 / 屏外不渲染） ===== */
+  /* 动画元素提示 GPU 合成，避免主线程卡顿（popper wrapper 不能加 transform/动画，否则覆盖 Radix 定位） */
+  .card,
+  [role="dialog"] {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* 屏外长列表跳过渲染，滚动更顺 */
+  tbody tr,
+  .bg-card {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 48px;
+  }
+
+  /* 滚动条平滑 */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* 输入框聚焦过渡 */
+  input,
+  select,
+  textarea {
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  /* 下拉框（Select / 业主搜索）点开：只淡入，不做位移，避免左上角闪一下再跳位 */
+  [data-radix-select-content],
+  [cmdk-root] {
+    animation: dropdown-in 0.18s ease-out;
+  }
+  @keyframes dropdown-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* 按钮：hover 微上浮 + 主按钮泛光 */
+  button {
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+  }
+  button:not(:disabled):hover {
+    transform: translateY(-1px);
+  }
+  button:not(:disabled):active {
+    transform: translateY(0);
+  }
+  .bg-primary:not(:disabled):hover {
+    box-shadow: 0 6px 18px -6px hsl(212 56% 40% / 0.5);
+  }
+
+  /* 浮层淡入（只作用于弹窗，不作用于下拉 wrapper，否则下拉会先在左上角闪一下再跳位） */
+  @keyframes layer-fade-in {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  [role="dialog"] {
+    animation: layer-fade-in 0.2s ease-out;
+  }
+  /* ===== 质感段结束 ===== */
+}
+
+/**
+ * Using the elevate system.
+ * Automatic contrast adjustment.
+ *
+ * <element className="hover-elevate" />
+ * <element className="active-elevate-2" />
+ *
+ * // Using the tailwind utility when a data attribute is "on"
+ * <element className="toggle-elevate data-[state=on]:toggle-elevated" />
+ * // Or manually controlling the toggle state
+ * <element className="toggle-elevate toggle-elevated" />
+ *
+ * Elevation systems have to handle many states.
+ * - not-hovered, vs. hovered vs. active  (three mutually exclusive states)
+ * - toggled or not
+ * - focused or not (this is not handled with these utilities)
+ *
+ * Even without handling focused or not, this is six possible combinations that
+ * need to be distinguished from eachother visually.
+ */
+@layer utilities {
+  /* Hide ugly search cancel button in Chrome until we can style it properly */
+  input[type="search"]::-webkit-search-cancel-button {
+    @apply hidden;
+  }
+
+  /* Placeholder styling for contentEditable div */
+  [contenteditable][data-placeholder]:empty::before {
+    content: attr(data-placeholder);
+    color: var(--muted-foreground);
+    pointer-events: none;
+  }
+
+  /* .no-default-hover-elevate/no-default-active-elevate is an escape hatch so consumers of
+   * buttons/badges can remove the automatic brightness adjustment on interactions
+   * and program their own. */
+  .no-default-hover-elevate {}
+  .no-default-active-elevate {}
+
+
+  /**
+   * Toggleable backgrounds go behind the content. Hoverable/active goes on top.
+   * This way they can stack/compound. Both will overlap the parent's borders!
+   * So borders will be automatically adjusted both on toggle, and hover/active,
+   * and they will be compounded.
+   */
+  .toggle-elevate::before,
+  .toggle-elevate-2::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0px;
+    /*border-radius: inherit;   match rounded corners */
+    border-radius: inherit;
+    z-index: -1;
+    /* sits behind content but above backdrop */
+  }
+
+  .toggle-elevate.toggle-elevated::before {
+    background-color: var(--elevate-2);
+  }
+
+  /* If there's a 1px border, adjust the inset so that it covers that parent's border */
+  .border.toggle-elevate::before {
+    inset: -1px;
+  }
+
+  /* Does not work on elements with overflow:hidden!
+   * Wrap in :where() to zero out specificity so Tailwind position utilities (absolute/fixed/sticky) can override */
+  :where(.hover-elevate:not(.no-default-hover-elevate)),
+  :where(.active-elevate:not(.no-default-active-elevate)),
+  :where(.hover-elevate-2:not(.no-default-hover-elevate)),
+  :where(.active-elevate-2:not(.no-default-active-elevate)) {
+    position: relative;
+    z-index: 0;
+  }
+
+  .hover-elevate:not(.no-default-hover-elevate)::after,
+  .active-elevate:not(.no-default-active-elevate)::after,
+  .hover-elevate-2:not(.no-default-hover-elevate)::after,
+  .active-elevate-2:not(.no-default-active-elevate)::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0px;
+    /*border-radius: inherit;   match rounded corners */
+    border-radius: inherit;
+    z-index: 999;
+    /* sits in front of content */
+  }
+
+  .hover-elevate:hover:not(.no-default-hover-elevate)::after,
+  .active-elevate:active:not(.no-default-active-elevate)::after {
+    background-color: var(--elevate-1);
+  }
+
+  .hover-elevate-2:hover:not(.no-default-hover-elevate)::after,
+  .active-elevate-2:active:not(.no-default-active-elevate)::after {
+    background-color: var(--elevate-2);
+  }
+
+  /* If there's a 1px border, adjust the inset so that it covers that parent's border */
+  .border.hover-elevate:not(.no-hover-interaction-elevate)::after,
+  .border.active-elevate:not(.no-active-interaction-elevate)::after,
+  .border.hover-elevate-2:not(.no-hover-interaction-elevate)::after,
+  .border.active-elevate-2:not(.no-active-interaction-elevate)::after,
+  .border.hover-elevate:not(.no-hover-interaction-elevate)::after {
+    inset: -1px;
+  }
+}

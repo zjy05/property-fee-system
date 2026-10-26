@@ -1,0 +1,53 @@
+services:
+  property-fee:
+    build: .
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./data:/app/data
+    environment:
+      DB_DRIVER: mysql
+      MYSQL_HOST: property-mysql
+      MYSQL_PORT: "3306"
+      MYSQL_DATABASE: property_fee
+      MYSQL_USER: property
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-property_pass_2026}
+    depends_on:
+      property-mysql:
+        condition: service_healthy
+    restart: unless-stopped
+
+  property-mysql:
+    image: mysql:8.0
+    container_name: property-fee-mysql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-property_root_2026}
+      MYSQL_DATABASE: property_fee
+      MYSQL_USER: property
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-property_pass_2026}
+    ports:
+      - "127.0.0.1:3307:3306"
+    volumes:
+      - property_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+    restart: unless-stopped
+
+  cpolar:
+    image: probezy/cpolar
+    container_name: cpolar
+    ports:
+      - "9200:9200"
+    volumes:
+      - ./cpolar.yml:/usr/local/etc/cpolar/cpolar.yml
+    restart: unless-stopped
+
+volumes:
+  property_mysql_data:
